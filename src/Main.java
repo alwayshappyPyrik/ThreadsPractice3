@@ -21,8 +21,8 @@ public class Main {
 
         Thread match = new Thread(() -> {
             for (String str : texts) {
-                if (str.length() == 3 && str.matches("^(.)\\1+$")) {
-                    three.getAndIncrement();
+                if (str.matches("^(.)\\1+$")) {
+                    chooseAtomic(str);
                 }
             }
         });
@@ -31,8 +31,8 @@ public class Main {
 
         Thread palindrome = new Thread(() -> {
             for (String str : texts) {
-                if (str.length() == 4 && isPalindrome(str)) {
-                    four.getAndIncrement();
+                if (isPalindrome(str)) {
+                    chooseAtomic(str);
                 }
             }
         });
@@ -41,8 +41,8 @@ public class Main {
 
         Thread ascending = new Thread(() -> {
             for (String str : texts) {
-                if (str.length() == 5 && isAscending(str)) {
-                    five.getAndIncrement();
+                if (isAscending(str)) {
+                    chooseAtomic(str);
                 }
             }
         });
@@ -82,5 +82,15 @@ public class Main {
                 return false;
         }
         return true;
+    }
+
+    public static void chooseAtomic(String str) {
+        if (str.length() == 3) {
+            three.getAndIncrement();
+        } else if (str.length() == 4) {
+            four.getAndIncrement();
+        } else if (str.length() == 5) {
+            five.getAndIncrement();
+        }
     }
 }
